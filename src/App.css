@@ -1,0 +1,105 @@
+/* CSS code for styling PrayerTimes component with highlighted current prayer time */
+
+* {
+	text-align: center;
+	box-sizing: border-box; /* Ensures padding and border are included in element's total width and height */
+}
+
+body {
+	font-family: Arial, sans-serif;
+	background-color: #f0f0f0;
+	background-image: radial-gradient(#ffffff 60%, #d1d1d1);
+	background-size: cover;
+	margin: 0; /* Remove default margin */
+	padding: 0;
+	display: flex;
+	align-items: center; /* Center items vertically */
+	justify-content: center; /* Center items horizontally */
+	height: 100vh; /* Make body take the full viewport height */
+}
+
+.App {
+	display: flex;
+	flex-direction: column; /* Stack children vertically */
+	align-items: center; /* Center horizontally */
+	justify-content: center; /* Center vertically */
+	max-width: 800px;
+	margin: 40px; /* Increased margin to make the box larger (changed from 20px to 40px) */
+	padding: 40px; /* Increased padding to make the box larger (changed from 20px to 40px) */
+	box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+	border-radius: 20px;
+	background-color: #ffffff;
+}
+
+.dates {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+}
+
+h1 {
+	font-family: Arial, sans-serif;
+	font-size: 32px;
+	font-weight: bold;
+	color: #24292e;
+	margin-bottom: 10px;
+}
+
+h1::after {
+	content: '';
+	display: block;
+	height: 2px;
+	width: 50px;
+	background-color: #24292e;
+	margin: 10px auto;
+	margin-top: 20px;
+}
+
+p {
+	font-family: Arial, sans-serif;
+	font-size: 16px;
+	color: #586069;
+	margin-right: 20px;
+	margin-left: 20px;
+}
+
+table {
+	width: 100%;
+	margin-top: 20px;
+	border-collapse: collapse;
+	border: none;
+	border-radius: 4px;
+	box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+}
+
+thead {
+	background-color: #f6f8fa;
+	color: #24292e;
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+th, td {
+	padding: 10px;
+	text-align: center;
+	border-bottom: 1px solid #e1e4e8;
+}
+
+tbody tr:hover {
+	background-color: #f3f4f6;
+}
+
+h1 {
+	margin-top: 0;
+}
+
+th, td {
+	border: none;
+	padding: 12px 20px;
+}
+
+td.highlight {
+	background-color: #007bb5;
+	color: #fff;
+}
