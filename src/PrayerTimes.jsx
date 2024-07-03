@@ -11,6 +11,7 @@ export default function PrayerTimes() {
 		setData(null)
 		getPrayerTimes('Ajax', 'Canada', day, month, year.slice(0, 4)).then((response) => {
 			setData(response);
+			document.title = `${response.meta.location.city}, ${response.meta.location.country} | ${response.date.gregorian.day} ${response.date.gregorian.month} ${response.date.gregorian.year}`;
 		});
 	}, []);
 
