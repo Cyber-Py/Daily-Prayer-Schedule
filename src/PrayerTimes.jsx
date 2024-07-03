@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import getPrayerTimes from './getPrayerTimes';
 import getLatLon from './getLatLon';
+import capatilazeFirstLetter from './capitalizeFirstLetter';
 
 export default function PrayerTimes() {
 	const [data, setData] = useState(null);
@@ -13,8 +14,14 @@ export default function PrayerTimes() {
 	const date = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' });
 	const [month, day, year] = date.split('/');
 
-	const handleChangeCity = (e) => setCity(e.target.value);
-	const handleChangeCountry = (e) => setCountry(e.target.value);
+	const handleChangeCity = (element) => {
+		setCity(capatilazeFirstLetter(element.target.value))
+		setSubmitted(false)
+	};
+	const handleChangeCountry = (element) => {
+		setCountry(capatilazeFirstLetter(element.target.value))
+		setSubmitted(false)
+	};
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
@@ -71,7 +78,7 @@ export default function PrayerTimes() {
 					<button type="submit">Submit</button>
 				</form>
 			</div>
-			{!isValidLocation && submitted && <p>Please enter a valid location.</p>}
+			{!isValidLocation && submitted && <p className='locationResult'>{city}, {country} is not a valid location</p>}
 			{data && isValidLocation && (
 				<div className='prayerTimes'>
 					<h1>Prayer Times in {data.meta.location.city}, {data.meta.location.country}</h1>
