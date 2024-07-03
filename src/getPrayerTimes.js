@@ -1,8 +1,6 @@
-export default async function getPrayerTimes(city, country, day, month, year = 2024) {
+export default async function getPrayerTimes(city, country, lat, lon, day, month, year = 2024) {
 	day--
-	city = encodeURIComponent(city);
-	country = encodeURIComponent(country);
-	let url = `https://api.aladhan.com/v1/calendarByCity/${year}/${month}?city=${city}&country=${country}&method=2`;
+	let url = `https://api.aladhan.com/v1/calendar/${year}/${month}?latitude=${lat}&longitude=${lon}&method=2`;
 	try {
 		const response = await fetch(url);
 		if (!response.ok) {

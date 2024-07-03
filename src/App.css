@@ -2,7 +2,7 @@
 
 * {
 	text-align: center;
-	box-sizing: border-box; /* Ensures padding and border are included in element's total width and height */
+	box-sizing: border-box;
 }
 
 body {
@@ -10,25 +10,81 @@ body {
 	background-color: #f0f0f0;
 	background-image: radial-gradient(#ffffff 60%, #d1d1d1);
 	background-size: cover;
-	margin: 0; /* Remove default margin */
+	margin: 0;
 	padding: 0;
 	display: flex;
-	align-items: center; /* Center items vertically */
-	justify-content: center; /* Center items horizontally */
-	height: 100vh; /* Make body take the full viewport height */
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
 }
 
-.App {
+.prayerTimes {
 	display: flex;
-	flex-direction: column; /* Stack children vertically */
-	align-items: center; /* Center horizontally */
-	justify-content: center; /* Center vertically */
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 	max-width: 800px;
-	margin: 40px; /* Increased margin to make the box larger (changed from 20px to 40px) */
-	padding: 40px; /* Increased padding to make the box larger (changed from 20px to 40px) */
+	margin: 40px;
+	padding: 40px;
 	box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
 	border-radius: 20px;
 	background-color: #ffffff;
+}
+
+.locationForm form {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	max-width: 800px;
+	margin: 40px;
+	padding: 40px;
+	box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+	border-radius: 20px;
+	background-color: #ffffff;
+}
+
+.locationForm input {
+	margin: 10px;
+	padding: 12px 20px;
+	font-size: 16px;
+	border: 2px solid #ccc;
+	border-radius: 4px;
+	transition: border-color 0.3s ease-in-out;
+	outline: none;
+	border-color: #ccc;
+}
+
+.locationForm input:focus {
+	border-color: #007bb5; 
+}
+
+.locationForm button {
+	margin: 10px;
+	padding: 12px 20px;
+	font-size: 16px;
+	background-color: #007bb5;
+	color: #fff;
+	border: 2px solid #007bb5;;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+	outline: none;
+}
+
+.locationForm button:hover {
+	background-color: #005a8c;
+}
+
+.locationForm button:focus {
+	border-color: #005a8c;
+	background-color: #005a8c;
+}
+
+@media (max-width: 800px) {
+	.locationFor {
+		flex-direction: column;
+	}
 }
 
 .dates {
@@ -86,8 +142,12 @@ th, td {
 	border-bottom: 1px solid #e1e4e8;
 }
 
+tbody tr {
+	transition: background-color 0.3s ease-in-out;
+}
+
 tbody tr:hover {
-	background-color: #f3f4f6;
+	background-color: #e3e3e3;
 }
 
 h1 {
@@ -102,4 +162,9 @@ th, td {
 td.highlight {
 	background-color: #007bb5;
 	color: #fff;
+	transition: background-color 0.3s ease-in-out;
+}
+
+td.highlight:hover {
+	background-color: #005a8c;
 }
