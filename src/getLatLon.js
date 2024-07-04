@@ -10,7 +10,6 @@ export default async function verifyCityAndCountry(cityName, countryName) {
 		}
 		return false
 	} catch(err) {
-		console.log(err);
-		return false;
+		throw err
 	}
 }

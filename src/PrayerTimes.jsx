@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import getPrayerTimes from './getPrayerTimes';
 import getLatLon from './getLatLon';
 import capatilazeFirstLetter from './capitalizeFirstLetter';
+import getTimeZoneFromLatLon from './getTimeZoneFromLatLon';
+import moment from 'moment-timezone';
 
 export default function PrayerTimes() {
 	const [data, setData] = useState(null);
@@ -9,10 +11,12 @@ export default function PrayerTimes() {
 	const [country, setCountry] = useState('');
 	const [submitted, setSubmitted] = useState(false);
 	const [isValidLocation, setIsValidLocation] = useState(true);
+	const [timeZone, setTimeZone] = useState(null);
 	const [loading, setLoading] = useState(false);
 
-	const date = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' });
-	const [month, day, year] = date.split('/');
+	let month;
+	let day;
+	let year;
 
 	const handleChangeCity = (element) => {
 		setCity(capatilazeFirstLetter(element.target.value))
@@ -33,16 +37,31 @@ export default function PrayerTimes() {
 		getLatLon(city, country)
 			.then((response) => {
 				if (response) {
-					getPrayerTimes(city, country, response.lat, response.lon, day, month, year.slice(0, 4))
-						.then((response) => {
-							setData(response);
-							document.title = `${response.meta.location.city}, ${response.meta.location.country} | ${response.date.gregorian.day} ${response.date.gregorian.month} ${response.date.gregorian.year}`;
-							setLoading(false);
-						})
-						.catch((error) => {
-							setIsValidLocation(false);
-							setLoading(false);
-						});
+					getTimeZoneFromLatLon(response.lat, response.lon).then((timeZoneData) => {
+						console.log(timeZoneData)
+						console.log(response.lat, response.lon)
+						setTimeZone(timeZoneData)
+						const momentDate = moment.tz(timeZone).toDate().toLocaleString();
+						console.log(momentDate)
+						const date = moment.tz(timeZone).valueOf();
+						console.log(date)
+						const [month, day, year] = momentDate.split('/');
+						console.log(month)
+						getPrayerTimes(city, country, response.lat, response.lon, day, month, year.slice(0, 4))
+							.then((prayerTimesResponse) => {
+								setData(prayerTimesResponse);
+								document.title = `${prayerTimesResponse.meta.location.city}, ${prayerTimesResponse.meta.location.country} | ${prayerTimesResponse.date.gregorian.day} ${prayerTimesResponse.date.gregorian.month} ${prayerTimesResponse.date.gregorian.year}`;
+								setLoading(false);
+							})
+							.catch((error) => {
+								setIsValidLocation(false);
+								setLoading(false);
+							});
+					})
+					.catch((error) => {
+						setIsValidLocation(false);
+						setLoading(false);
+					})
 				} else {
 					setIsValidLocation(false);
 					setLoading(false);
@@ -55,12 +74,15 @@ export default function PrayerTimes() {
 	};
 
 	const isCurrentPrayer = (prevPrayerTime, currentPrayerTime, nextDay = false) => {
-		let currentDateTime = new Date().getTime();
+		const momentDate = moment.tz(timeZone).toDate().toLocaleString();
+		const currentDateTime = moment.tz(timeZone).valueOf();
+		const [month, day, year] = momentDate.split('/');
 		let newDay = day;
 		if (nextDay) {
 			newDay++;
 		}
 		const currentPrayerDateTime = new Date(`${year.slice(0, 4)}-${month}-${newDay} ${currentPrayerTime}:00`).getTime();
+		console.log(currentPrayerDateTime)
 		const prevPrayerDateTime = new Date(`${year.slice(0, 4)}-${month}-${day} ${prevPrayerTime}:00`).getTime();
 		return prevPrayerDateTime < currentDateTime && currentDateTime <= currentPrayerDateTime;
 	};
