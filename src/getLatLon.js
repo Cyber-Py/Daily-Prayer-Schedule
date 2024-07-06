@@ -1,4 +1,4 @@
-export default async function verifyCityAndCountry(cityName, countryName) {
+export default async function getLatLon(cityName, countryName) {
 	const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(cityName)},${encodeURIComponent(countryName)}`;
 
 	try {
@@ -6,7 +6,9 @@ export default async function verifyCityAndCountry(cityName, countryName) {
 		const data = await response.json();
 
 		if (data.length > 0) {
-			return { lat: data[0].lat, lon: data[0].lon };
+			let city = data[0].display_name.split(',')[0].trim();
+			let country = data[0].display_name.split(',').pop().trim();
+			return { lat: data[0].lat, lon: data[0].lon, city: city, country: country };
 		}
 		return false
 	} catch(err) {

@@ -1,4 +1,4 @@
-/* CSS code for styling PrayerTimes component with highlighted current prayer time */
+
 
 * {
 	text-align: center;
@@ -18,17 +18,82 @@ body {
 	height: 100vh;
 }
 
+.App {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.locationInfo {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+}
+
 .prayerTimes {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	max-width: 800px;
 	margin: 40px;
 	padding: 40px;
 	box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
 	border-radius: 20px;
 	background-color: #ffffff;
+}
+
+.prayerTime {
+	margin: 10px;
+	width: 120px;
+	height: 85px;
+	border-radius: 10px;
+	text-align: center;
+	vertical-align: middle;
+	background-color: #f2f2f2;
+	transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.prayerTime:hover {
+	background-color: #d9d9d9;
+	box-shadow: 0 0 15px rgba(217, 217, 217, 0.5)
+}
+
+.prayerTimeHighlight {
+	background-color: #e0f7ff;
+	font-weight: bold;
+	box-shadow: 0 0 10px rgba(0, 123, 181, 0.3);
+	padding: 10px 20px;
+	font-size: 1.2em;
+	border-radius: 10px;
+	transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+	margin: 10px;
+}
+
+.prayerTimeHighlight > p {
+	color: #005a8c;
+	transition: color 0.3s ease-in-out;
+}
+
+.prayerTimeHighlight:hover {
+	background-color: #b3eaff;
+	box-shadow: 0 0 15px rgba(0, 123, 181, 0.5);
+	transform: scale(1.05);
+}
+
+.prayerTimeHighlight:hover > p {
+	color: #004c6b;
+}
+
+.prayerTimings {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	margin-left: 20px;
+	margin-right: 20px;
+	margin-top: 10px;
 }
 
 .locationForm form {
@@ -82,9 +147,55 @@ body {
 }
 
 @media (max-width: 800px) {
-	.locationFor {
+	.locationForm {
 		flex-direction: column;
 	}
+}
+
+.additionalInfo {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	max-width: 800px;
+	margin: 40px;
+	padding: 40px;
+	box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+	border-radius: 20px;
+	background-color: #ffffff;
+}
+
+.sunrise-bar, .sunset-bar {
+	background-color: #f0ad4e;
+	height: 10px;
+	width: 0%;
+	transition: width 1s ease-in-out;
+}
+
+.sunrise-bar {
+	
+	width: 50%;
+}
+
+.sunset-bar {
+	
+	width: 30%;
+}
+
+.sunrise, .sunset {
+	display: flex;
+	align-items: center;
+}
+
+.sunrise-bar, .sunset-bar, .sunrise span, .sunset span {
+	margin: 5px;
+}
+
+.otherTimeInfo {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
 }
 
 .dates {
@@ -123,22 +234,22 @@ p {
 .locationResult {
 	font-family: Arial, sans-serif;
 	font-size: 16px;
-	color: #d9534f; /* Red color for error indication */
-	background-color: #f2dede; /* Light red background for visibility */
-	border: 1px solid #ebcccc; /* Border color matching the background */
-	padding: 12px 20px; /* Padding to make the message more noticeable */
-	margin: 10px 0; /* Margin to separate it from other elements */
-	border-radius: 4px; /* Rounded corners for a softer look */
-	box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
-	text-align: center; /* Center the text */
-	transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out; /* Smooth transitions */
-	max-width: 800px; /* Same max-width as locationForm */
-	box-sizing: border-box; /* Include padding and border in width */
+	color: #d9534f;
+	background-color: #f2dede;
+	border: 1px solid #ebcccc;
+	padding: 12px 20px;
+	margin: 10px 0;
+	border-radius: 4px;
+	box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+	text-align: center;
+	transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+	max-width: 800px;
+	box-sizing: border-box;
 }
 
 .locationResult:hover {
-	background-color: #ebcccc; /* Slightly darker background on hover */
-	color: #a94442; /* Darker red text on hover */
+	background-color: #ebcccc;
+	color: #a94442;
 }
 
 table {
