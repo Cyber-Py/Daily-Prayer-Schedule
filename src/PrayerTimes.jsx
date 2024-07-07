@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { capitalizeFirstLetter, getLatLon, getPrayerTimes, getTimeZoneFromLatLon } from './prayerTimeUtils';
-import TipModal from './TipModal';
+import TipModal from './components/TipModal';
+import PrayerTimings from './components/PrayerTimings';
 import moment from 'moment-timezone';
-import PrayerTimings from './PrayerTimings';
 
 export default function PrayerTimes() {
 	const [data, setData] = useState(null);
