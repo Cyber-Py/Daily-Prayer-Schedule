@@ -16,7 +16,7 @@ publicDir = "dist"
 
 [[ports]]
 localPort = 5173
-externalPort = 80
+externalPort = 8000
 
 [rules]
 
@@ -25,4 +25,3 @@ externalPort = 80
 [rules.formatter.fileExtensions]
 
 [rules.formatter.fileExtensions.".js"]
-id = "module:nodejs-20/languageServer:typescript-language-server"

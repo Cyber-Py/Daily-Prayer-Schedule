@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import getPrayerTimes from './getPrayerTimes';
-import getLatLon from './getLatLon';
-import capatilazeFirstLetter from './capitalizeFirstLetter';
-import getTimeZoneFromLatLon from './getTimeZoneFromLatLon';
-import moment from 'moment-timezone';
+import React, { useState } from 'react';
+import { capitalizeFirstLetter, getLatLon, getPrayerTimes, getTimeZoneFromLatLon } from './prayerTimeUtils';
 import TipModal from './TipModal';
+import moment from 'moment-timezone';
+import PrayerTimings from './PrayerTimings';
 
 export default function PrayerTimes() {
 	const [data, setData] = useState(null);
@@ -20,11 +18,11 @@ export default function PrayerTimes() {
 	const [locationFormVisibility, setLocationFormVisibility] = useState(true);
 	
 	const handleChangeCity = (element) => {
-		setCity(capatilazeFirstLetter(element.target.value))
+		setCity(capitalizeFirstLetter(element.target.value))
 		setSubmitted(false)
 	};
 	const handleChangeCountry = (element) => {
-		setCountry(capatilazeFirstLetter(element.target.value))
+		setCountry(capitalizeFirstLetter(element.target.value))
 		setSubmitted(false)
 	};
 
@@ -96,21 +94,7 @@ export default function PrayerTimes() {
 				setLoading(false);
 			});
 	};
-
-	const isUpcomingPrayer = (currentPrayerTime, nextPrayerTime, nextDay = false) => {
-		if (!timeZone) return false;
-		const now = moment().tz(timeZone);
-		const currentDate = now.format('YYYY-MM-DD');
-		let prevTime = moment.tz(`${currentDate} ${currentPrayerTime}`, 'YYYY-MM-DD HH:mm', timeZone);
-		let currentTime = moment.tz(`${currentDate} ${nextPrayerTime}`, 'YYYY-MM-DD HH:mm', timeZone);
-		if (nextDay) {
-			currentTime.add(1, 'day');
-		}
-		let result = now.isBetween(prevTime, currentTime, null, '[)');
-		let newResult = (result ? 'prayerTimeHighlight' : 'prayerTime');
-		return newResult
-	};
-
+	
 	if (loading) {
 		return <p>Loading...</p>;
 	}
@@ -128,48 +112,17 @@ export default function PrayerTimes() {
 			)}
 			{!isValidLocation && submitted && <p className='locationResult'>{city}, {country} is not a valid location</p>}
 			{data && isValidLocation && (
-			<div className='locationInfo'>
-				<div className='prayerTimes'>
-					<h1 onClick={handleHeadingClick}>Prayer Times in {displayCity}, {displayCountry}</h1>
-					<span></span>
-					<div className='dates'>
-						<p>{data.date.gregorian.weekday} the {data.date.gregorian.day}, {data.date.gregorian.month} {data.date.gregorian.year}</p>
-						<p>{data.date.hijri.weekday} the {data.date.hijri.day}, {data.date.hijri.month} {data.date.hijri.year}</p>
-					</div>
-					<div className='prayerTimings'>
-						<div className={isUpcomingPrayer(data.timings.Isha, data.timings.Fajr)}>
-							<p className='upcoming'>Upcoming</p>
-							<p>Fajr</p>
-							<p>{data.timings.Fajr}</p>
+				<div className='locationInfo'>
+					<div className='prayerTimes'>
+						<h1 onClick={handleHeadingClick}>Prayer Times in {displayCity}, {displayCountry}</h1>
+						<span></span>
+						<div className='dates'>
+							<p>{data.date.gregorian.weekday} the {data.date.gregorian.day}, {data.date.gregorian.month} {data.date.gregorian.year}</p>
+							<p>{data.date.hijri.weekday} the {data.date.hijri.day}, {data.date.hijri.month} {data.date.hijri.year}</p>
 						</div>
-						<div className={isUpcomingPrayer(data.timings.Fajr, data.timings.Sunrise)}>
-							<p className='upcoming'>Upcoming</p>
-							<p>Sunrise</p>
-							<p>{data.timings.Sunrise}</p>
-						</div>
-						<div className={isUpcomingPrayer(data.timings.Sunrise, data.timings.Dhuhr)}>
-							<p className='upcoming'>Upcoming</p>
-							<p>Dhuhr</p>
-							<p>{data.timings.Dhuhr}</p>
-						</div>
-						<div className={isUpcomingPrayer(data.timings.Dhuhr, data.timings.Asr)}>
-							<p className='upcoming'>Upcoming</p>
-							<p>Asr</p>
-							<p>{data.timings.Asr}</p>
-						</div>
-						<div className={isUpcomingPrayer(data.timings.Asr, data.timings.Maghrib)}>
-							<p className='upcoming'>Upcoming</p>
-							<p>Maghrib</p>
-							<p>{data.timings.Maghrib}</p>
-						</div>
-						<div className={isUpcomingPrayer(data.timings.Maghrib, data.timings.Isha)}>
-							<p className='upcoming'>Upcoming</p>
-							<p>Isha</p>
-							<p>{data.timings.Isha}</p>
-						</div>
+						<PrayerTimings data={data} timeZone={timeZone}/>
 					</div>
 				</div>
-			</div>
 			)}
 			{data && isValidLocation && (
 				<div className='tipDiv'>
