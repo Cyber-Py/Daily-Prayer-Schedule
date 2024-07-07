@@ -1,5 +1,5 @@
 import React from 'react';
-import { isUpcomingPrayer } from './prayerTimeUtils';
+import { isUpcomingPrayer } from '../prayerTimeUtils';
 
 export default function PrayerTimingsSection(props) {
 	return (
