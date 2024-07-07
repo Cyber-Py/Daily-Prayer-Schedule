@@ -1,0 +1,12 @@
+import React from 'react';
+
+export default function TipModal({ onClose }) {
+  return (
+	<div className="tipModal">
+	  <div className="tipModal-content">
+		<span className="close" onClick={onClose}>&times;</span>
+		<p>It's recommended to wait at least 5 minutes before starting to pray. This is because prayer times are calculated based on astronomical calculations and local horizon conditions, which can vary slightly. Waiting ensures that you are offering your prayers at the correct time according to your location and local conditions.</p>
+	  </div>
+	</div>
+  );
+}
