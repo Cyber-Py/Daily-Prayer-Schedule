@@ -68,7 +68,7 @@ export default function PrayerTimes() {
 						getPrayerTimes(city, country, response.lat, response.lon, day, month, year.slice(0, 4))
 							.then((prayerTimesResponse) => {
 								setData(prayerTimesResponse);
-								document.title = `${city}, ${country} | ${prayerTimesResponse.date.gregorian.day} ${prayerTimesResponse.date.gregorian.month} ${prayerTimesResponse.date.gregorian.year}`;
+								document.title = `${displayCity}, ${displayCountry} | ${prayerTimesResponse.date.gregorian.day} ${prayerTimesResponse.date.gregorian.month} ${prayerTimesResponse.date.gregorian.year}`;
 								setLoading(false);
 							})
 							.catch((error) => {
