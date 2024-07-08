@@ -55,7 +55,7 @@ body {
 	transition: color 0.3s ease-in-out, font-size 0.3s ease-in-out;
 }
 
-.prayerTimes h1 i {
+.prayerTimes h1 > i {
 	color: #007bb5;
 	font-size: 30px;
 	margin-right: 25px;
@@ -63,7 +63,7 @@ body {
 	transform-style: preserve-3d;
 }
 
-.prayerTimes h1:hover i {
+.prayerTimes h1 > i:hover {
 	color: #005a8c;
 	cursor: pointer;
 	transform: scale(1.1) rotateY(360deg);

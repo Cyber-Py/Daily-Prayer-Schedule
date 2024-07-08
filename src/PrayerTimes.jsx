@@ -35,6 +35,7 @@ export default function PrayerTimes() {
 		setData(null)
 		setCity('')
 		setCountry('')
+		document.title = 'Prayer Times'
 		setLocationFormVisibility(!locationFormVisibility);
 	}
 
@@ -56,19 +57,14 @@ export default function PrayerTimes() {
 					setDisplayCity(response.city);
 					setDisplayCountry(response.country);
 					getTimeZoneFromLatLon(response.lat, response.lon).then((timeZoneData) => {
-						console.log(timeZoneData)
-						console.log(response.lat, response.lon)
 						setTimeZone(timeZoneData)
 						const momentDate = moment.tz(timeZone).toDate().toLocaleString();
-						console.log(momentDate)
 						const date = moment.tz(timeZone).valueOf();
-						console.log(date)
 						const [month, day, year] = momentDate.split('/');
-						console.log(month)
 						getPrayerTimes(city, country, response.lat, response.lon, day, month, year.slice(0, 4))
 							.then((prayerTimesResponse) => {
 								setData(prayerTimesResponse);
-								document.title = `${displayCity}, ${displayCountry} | ${prayerTimesResponse.date.gregorian.day} ${prayerTimesResponse.date.gregorian.month} ${prayerTimesResponse.date.gregorian.year}`;
+								document.title = `${city}, ${country} | ${prayerTimesResponse.date.gregorian.day} ${prayerTimesResponse.date.gregorian.month} ${prayerTimesResponse.date.gregorian.year}`;
 								setLoading(false);
 							})
 							.catch((error) => {
