@@ -59,12 +59,14 @@ body {
 	color: #007bb5;
 	font-size: 30px;
 	margin-right: 25px;
-	transition: color 0.3s ease-in-out;
+	transition: color 0.3s ease-in-out, transform 0.6s ease-in-out;
+	transform-style: preserve-3d;
 }
 
 .prayerTimes h1:hover i {
 	color: #005a8c;
 	cursor: pointer;
+	transform: scale(1.1) rotateY(360deg);
 }
 
 .prayerTimes span {
@@ -75,12 +77,6 @@ body {
 	background-color: #24292e;
 	margin: 10px auto;
 	margin-top: 20px;
-	transition: none;
-}
-
-.prayerTimes:hover span {
-	background-color: #24292e;
-	transition: none;
 }
 
 .prayerTime {
@@ -247,7 +243,6 @@ p {
 	justify-content: center;
 	margin: 10px 0;
 	transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, transform 0.3s ease-in-out;
-	animation: pulse 1s ease-in-out;
 }
 
 .tip {
@@ -280,61 +275,39 @@ p {
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
-.infoButton {
+.tipDiv > i {
 	position: absolute;
 	top: -10px;
 	right: -10px;
-	width: 25px;
-	height: 25px;
-	background-color: #007bb5;
+	color: #007bb5;
+	font-size: 25px;
 	border-radius: 50%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	cursor: pointer;
-	z-index: 1;
-	transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
-}
-
-.infoButton:hover {
-	background-color: #005a8c;
-	transform: scale(1.1);
-	cursor: help;
-}
-
-.infoButton span {
-	font-family: monospace;
-	font-size: 20px;
-	font-weight: bold;
-	color: #fff;
-}
-
-.close {
-	color: #aaa;
-	float: right;
-	font-size: 28px;
-	font-weight: bold;
 	transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
-.close:hover,
-.close:focus {
-	color: black;
-	text-decoration: none;
-	cursor: pointer;
-	transform: scale(1.1);
+.tipDiv > i:hover {
+	color: #005a8c;
+	transform: scale(1.1) rotate(360deg);
+	cursor: help;
 }
 
-@keyframes pulse {
-	0% {
-		transform: scale(1);
-	}
-	50% {
-		transform: scale(1.05);
-	}
-	100% {
-		transform: scale(1);
-	}
+.tipModal-content > i {
+	color: #aaa;
+	font-size: 35px;
+	font-weight: bold;
+	transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+	transform-style: preserve-3d;
+}
+
+.tipModal-content > i:hover {
+	color: #000;
+	text-decoration: none;
+	cursor: pointer;
+	transform: scale(1.1) rotateY(180deg) rotateX(180deg);
 }
 
 @media (max-width: 800px) {

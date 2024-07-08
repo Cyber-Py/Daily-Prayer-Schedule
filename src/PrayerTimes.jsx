@@ -130,9 +130,7 @@ export default function PrayerTimes() {
 			{data && isValidLocation && (
 				<div className='tipDiv'>
 					<p className='tip'>It's best to wait at least 5 minutes before praying.</p>
-					<div className='infoButton' onClick={toggleModal}>
-						<span>i</span>
-					</div>
+					<i class="fa-solid fa-circle-info" onClick={toggleModal}></i>
 				</div>
 			)}
 			{modalVisibility && <TipModal onClose={toggleModal} />}
