@@ -3,6 +3,7 @@ import { capitalizeFirstLetter, getLatLon, getPrayerTimes, getTimeZoneFromLatLon
 import TipModal from './components/TipModal';
 import PrayerTimings from './components/PrayerTimings';
 import moment from 'moment-timezone';
+import LoadingAnimation from './components/LoadingAnimation';
 
 export default function PrayerTimes() {
 	const [data, setData] = useState(null);
@@ -96,7 +97,7 @@ export default function PrayerTimes() {
 	};
 	
 	if (loading) {
-		return <p>Loading...</p>;
+		return <LoadingAnimation />;
 	}
 
 	return (
