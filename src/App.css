@@ -1,10 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
 * {
 	text-align: center;
 	box-sizing: border-box;
 }
 
 body {
-	font-family: Arial, sans-serif;
+	font-family: 'Roboto', sans-serif;
 	background-color: #f0f0f0;
 	background-image: radial-gradient(#ffffff 60%, #d1d1d1);
 	background-size: cover;
@@ -36,29 +38,32 @@ body {
 	align-items: center;
 	justify-content: center;
 	margin: 40px;
-	margin-top:0px;
+	margin-top: 0px;
 	padding: 40px;
 	box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
 	border-radius: 20px;
 	background-color: #ffffff;
 }
 
-
-
 .prayerTimes h1 {
-	font-family: Arial, sans-serif;
+	font-family: 'Roboto', sans-serif;
 	font-size: 32px;
 	font-weight: bold;
 	color: #24292e;
 	margin-bottom: 10px;
 	margin-top: 0px;
 	transition: color 0.3s ease-in-out, font-size 0.3s ease-in-out;
-	animation: pulse 1s ease-in-out;
 }
 
-.prayerTimes h1:hover {
-	color: #7d7d7d;
-	font-size: 31px;
+.prayerTimes h1 i {
+	color: #007bb5;
+	font-size: 30px;
+	margin-right: 25px;
+	transition: color 0.3s ease-in-out;
+}
+
+.prayerTimes h1:hover i {
+	color: #005a8c;
 	cursor: pointer;
 }
 
@@ -118,9 +123,9 @@ body {
 	display: block;
 	font-weight: normal;
 	letter-spacing: 0.8px;
-	font-size: 0.9em; /* Adjust the font size */
-	margin-top: 5px; /* Add some space above */
-	color: #004c6b; /* Change text color */
+	font-size: 0.9em;
+	margin-top: 5px;
+	color: #004c6b;
 }
 
 .prayerTimeHighlight:hover {
@@ -177,7 +182,7 @@ body {
 	font-size: 16px;
 	background-color: #007bb5;
 	color: #fff;
-	border: 2px solid #007bb5;;
+	border: 2px solid #007bb5;
 	border-radius: 4px;
 	cursor: pointer;
 	transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
@@ -185,6 +190,7 @@ body {
 }
 
 .locationForm button:hover {
+	border-color: #005a8c;
 	background-color: #005a8c;
 }
 
@@ -201,7 +207,7 @@ body {
 }
 
 p {
-	font-family: Arial, sans-serif;
+	font-family: 'Roboto', sans-serif;
 	font-size: 16px;
 	color: #586069;
 	margin-right: 20px;
@@ -209,7 +215,7 @@ p {
 }
 
 .locationResult {
-	font-family: Arial, sans-serif;
+	font-family: 'Roboto', sans-serif;
 	font-size: 16px;
 	color: #d9534f;
 	background-color: #f2dede;
@@ -230,6 +236,7 @@ p {
 }
 
 .tipDiv {
+	position: relative;
 	padding: 20px;
 	box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
 	border-radius: 20px;
@@ -240,29 +247,11 @@ p {
 	justify-content: center;
 	margin: 10px 0;
 	transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, transform 0.3s ease-in-out;
-	animation: pulse 1s ease-in-out
-}
-
-.tipDiv:hover {
-	background-color: #f0f0f0; /* Light gray background on hover */
-	color: #555; /* Darker text color on hover */
-	transform: scale(1.05);
-}
-
-@keyframes pulse {
-	0% {
-		transform: scale(1); /* Start size */
-	}
-	50% {
-		transform: scale(1.05); /* Pulse size */
-	}
-	100% {
-		transform: scale(1); /* Return to original size */
-	}
+	animation: pulse 1s ease-in-out;
 }
 
 .tip {
-	font-family: Arial, sans-serif;
+	font-family: 'Roboto', sans-serif;
 	font-size: 16px;
 	color: #586069;
 	margin: 0px 20px;
@@ -291,6 +280,35 @@ p {
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
+.infoButton {
+	position: absolute;
+	top: -10px;
+	right: -10px;
+	width: 25px;
+	height: 25px;
+	background-color: #007bb5;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	z-index: 1;
+	transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.infoButton:hover {
+	background-color: #005a8c;
+	transform: scale(1.1);
+	cursor: help;
+}
+
+.infoButton span {
+	font-family: monospace;
+	font-size: 20px;
+	font-weight: bold;
+	color: #fff;
+}
+
 .close {
 	color: #aaa;
 	float: right;
@@ -307,6 +325,17 @@ p {
 	transform: scale(1.1);
 }
 
+@keyframes pulse {
+	0% {
+		transform: scale(1);
+	}
+	50% {
+		transform: scale(1.05);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
 
 @media (max-width: 800px) {
 	.locationForm {
