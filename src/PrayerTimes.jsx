@@ -114,7 +114,10 @@ export default function PrayerTimes() {
 			{data && isValidLocation && (
 				<div className='locationInfo'>
 					<div className='prayerTimes'>
-						<h1 onClick={handleHeadingClick}>Prayer Times in {displayCity}, {displayCountry}</h1>
+						<h1>
+							<i class="fa-solid fa-magnifying-glass-location" onClick={handleHeadingClick}></i>
+							Prayer Times in {displayCity}, {displayCountry}
+						</h1>
 						<span></span>
 						<div className='dates'>
 							<p>{data.date.gregorian.weekday} the {data.date.gregorian.day}, {data.date.gregorian.month} {data.date.gregorian.year}</p>
@@ -126,7 +129,10 @@ export default function PrayerTimes() {
 			)}
 			{data && isValidLocation && (
 				<div className='tipDiv'>
-					<p className='tip' onClick={toggleModal}>It's best to wait at least 5 minutes before praying.</p>
+					<p className='tip'>It's best to wait at least 5 minutes before praying.</p>
+					<div className='infoButton' onClick={toggleModal}>
+						<span>i</span>
+					</div>
 				</div>
 			)}
 			{modalVisibility && <TipModal onClose={toggleModal} />}
