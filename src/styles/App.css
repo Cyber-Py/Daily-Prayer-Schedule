@@ -144,6 +144,17 @@ body {
 	margin-top: 10px;
 }
 
+.locationInfoContainer {
+	display: flex;
+	flex-direction: row;
+	align-items: stretch;
+	justify-content: center;
+}
+
+.locationInfo {
+	flex: 1;
+}
+
 .locationForm form {
 	display: flex;
 	flex-direction: row;
@@ -289,25 +300,24 @@ p {
 	transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
-.tipDiv > i:hover {
+.fa-circle-info:hover {
 	color: #005a8c;
 	transform: scale(1.1) rotate(360deg);
 	cursor: help;
 }
 
-.tipModal-content > i {
+.fa-circle-xmark {
 	color: #aaa;
 	font-size: 35px;
 	font-weight: bold;
 	transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
-	transform-style: preserve-3d;
 }
 
-.tipModal-content > i:hover {
+.fa-circle-xmark:hover {
 	color: #000;
 	text-decoration: none;
 	cursor: pointer;
-	transform: scale(1.1) rotateY(180deg) rotateX(180deg);
+	transform: scale(1.1) rotate(90deg);
 }
 
 @media (max-width: 800px) {

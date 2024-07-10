@@ -1,5 +1,6 @@
 import './styles/App.css'
 import './styles/loadingAnimation.css'
+import './styles/hadith.css'
 import PrayerTimes from './PrayerTimes'
 import { SpeedInsights } from '@vercel/speed-insights/react';
 

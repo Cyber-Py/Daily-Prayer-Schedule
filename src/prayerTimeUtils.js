@@ -97,9 +97,24 @@ export async function getPrayerTimes(city, country, lat, lon, day, month, year =
 			}
 		}
 	} catch (err) {
-		const errorMessage = `A problem has occured while getting the prayer times:\n${err}`;
-		console.log(errorMessage);
-		return errorMessage;
+		throw err
+	}
+}
+
+export async function getHadith () {
+	const books = ['bukhari', 'muslim', 'abudawud', 'ibnmajah', 'tirmidhi']
+	const book = books[Math.floor(Math.random() * books.length)]
+	const url = `https://random-hadith-generator.vercel.app/${book}`
+	console.log(url)
+	try {
+		const response = await fetch(url);
+		const data = await response.json();
+		data.data.hadith_english = data.data.hadith_english.replace(/\n/g, ' ');
+		data.data.bookName = data.data.bookName.replace(/\n/g, '');
+		data.data.header = data.data.header.replace(/\n/g, '');
+		return data.data
+	} catch (error) {
+		throw error;
 	}
 }
 
