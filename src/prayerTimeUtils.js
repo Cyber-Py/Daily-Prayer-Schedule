@@ -1,12 +1,15 @@
 import moment from 'moment-timezone';
 
-export const isUpcomingPrayer = (currentPrayerTime, nextPrayerTime, timeZone, nextDay = false) => {
+export const isUpcomingPrayer = (currentPrayerTime, nextPrayerTime, timeZone, prevDay = false) => {
 	if (!timeZone) return false;
 	const now = moment().tz(timeZone);
 	const currentDate = now.format('YYYY-MM-DD');
 	let prevTime = moment.tz(`${currentDate} ${currentPrayerTime}`, 'YYYY-MM-DD HH:mm', timeZone);
 	let currentTime = moment.tz(`${currentDate} ${nextPrayerTime}`, 'YYYY-MM-DD HH:mm', timeZone);
-	if (nextDay) { currentTime.add(1, 'day') };
+	if (prevDay) {
+		currentTime = moment.tz(`${currentDate} ${nextPrayerTime}`, 'YYYY-MM-DD HH:mm', timeZone).add(1, 'day');
+	}
+	console.log(prevTime, currentTime)
 	let result = now.isBetween(prevTime, currentTime, null, '[)');
 	return result ? 'prayerTimeHighlight' : 'prayerTime';
 }
@@ -110,6 +113,14 @@ export async function getHadith () {
 		const response = await fetch(url);
 		const data = await response.json();
 		data.data.hadith_english = data.data.hadith_english.replace(/\n/g, ' ');
+		if (data.data.hadith_english.length > 230) {
+			let splitIndex = data.data.hadith_english.indexOf(' ', 230);
+			if (splitIndex === -1) {
+				splitIndex = 230;
+			}
+			data.data.hadith_english_remaining = data.data.hadith_english.slice(splitIndex);
+			data.data.hadith_english = data.data.hadith_english.slice(0, splitIndex) + '...';
+		}
 		data.data.bookName = data.data.bookName.replace(/\n/g, '');
 		data.data.header = data.data.header.replace(/\n/g, '');
 		return data.data
