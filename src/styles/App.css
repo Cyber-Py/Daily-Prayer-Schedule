@@ -7,9 +7,10 @@
 
 body {
 	font-family: 'Roboto', sans-serif;
-	background-color: #f0f0f0;
-	background-image: radial-gradient(#ffffff 60%, #d1d1d1);
-	background-size: cover;
+	background-color: #10112F;
+	background-image: url('../images/IslamicArt.jpeg');
+	background-size: 300px;
+	background-repeat: repeat-y repeat-x;
 	margin: 0;
 	padding: 0;
 	display: flex;
@@ -40,31 +41,31 @@ body {
 	margin: 40px;
 	margin-top: 0px;
 	padding: 40px;
-	box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+	box-shadow: 0px 0px 10px 7px rgba(16, 17, 47, 1);
 	border-radius: 20px;
-	background-color: #ffffff;
+	background-color: #10112F;
 }
 
 .prayerTimes h1 {
 	font-family: 'Roboto', sans-serif;
 	font-size: 32px;
 	font-weight: bold;
-	color: #24292e;
+	color: #fff;
 	margin-bottom: 10px;
 	margin-top: 0px;
 	transition: color 0.3s ease-in-out, font-size 0.3s ease-in-out;
 }
 
 .prayerTimes h1 > i {
-	color: #007bb5;
+	color: #ffc14d;
 	font-size: 30px;
 	margin-right: 25px;
-	transition: color 0.3s ease-in-out, transform 0.6s ease-in-out;
+	transition: color 0.3s ease-in-out, transform 0.6s ease-in-out, box-shadow 0.3s ease-in-out;
 	transform-style: preserve-3d;
 }
 
 .prayerTimes h1 > i:hover {
-	color: #005a8c;
+	color: #f9a915;
 	cursor: pointer;
 	transform: scale(1.1) rotateY(360deg);
 }
@@ -74,7 +75,7 @@ body {
 	display: block;
 	height: 2px;
 	width: 50px;
-	background-color: #24292e;
+	background-color: #fff;
 	margin: 10px auto;
 	margin-top: 20px;
 }
@@ -86,7 +87,7 @@ body {
 	border-radius: 10px;
 	text-align: center;
 	vertical-align: middle;
-	background-color: #f2f2f2;
+	background-color: #D3BA8B;
 	transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
@@ -95,14 +96,14 @@ body {
 }
 
 .prayerTime:hover {
-	background-color: #d9d9d9;
-	box-shadow: 0 0 15px rgba(217, 217, 217, 0.5)
+	background-color: #ffc14d;
+	box-shadow: 0 0 15px rgba(255, 193, 77, 0.5)
 }
 
 .prayerTimeHighlight {
-	background-color: #e0f7ff;
+	background-color: #ffffff;
 	font-weight: bold;
-	box-shadow: 0 0 10px rgba(0, 123, 181, 0.3);
+	box-shadow: 0 0 25px rgba(255, 255, 255, 0.7);
 	padding: 10px 20px;
 	font-size: 1.2em;
 	border-radius: 10px;
@@ -111,7 +112,7 @@ body {
 }
 
 .prayerTimeHighlight > p {
-	color: #005a8c;
+	color: #10112f;
 	transition: color 0.3s ease-in-out;
 }
 
@@ -121,19 +122,19 @@ body {
 	letter-spacing: 0.8px;
 	font-size: 0.9em;
 	margin-top: 5px;
-	color: #004c6b;
+	color: #10112f;
 }
 
 .prayerTimeHighlight:hover {
-	background-color: #b3eaff;
-	box-shadow: 0 0 15px rgba(0, 123, 181, 0.5);
+	background-color: #cccccc;
+	box-shadow: 0 0 15px rgba(204, 204, 204, 0.5);
 	transform: scale(1.05);
 }
 
-.prayerTimeHighlight:hover > p {
+/* .prayerTimeHighlight:hover > p {
 	color: #004c6b;
 }
-
+ */
 .prayerTimings {
 	display: flex;
 	flex-direction: row;
@@ -163,33 +164,32 @@ body {
 	max-width: 800px;
 	margin: 40px;
 	padding: 40px;
-	box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+	box-shadow: 0px 0px 10px 7px rgba(16, 17, 47, 1);
 	border-radius: 20px;
-	background-color: #ffffff;
+	background-color: #10112F;
 }
 
 .locationForm input {
 	margin: 10px;
 	padding: 12px 20px;
 	font-size: 16px;
-	border: 2px solid #ccc;
+	border: 4px solid #D3BA8B;
 	border-radius: 4px;
 	transition: border-color 0.3s ease-in-out;
 	outline: none;
-	border-color: #ccc;
 }
 
 .locationForm input:focus {
-	border-color: #007bb5; 
+	border-color: #ffdd9e; 
 }
 
 .locationForm button {
 	margin: 10px;
 	padding: 12px 20px;
 	font-size: 16px;
-	background-color: #007bb5;
-	color: #fff;
-	border: 2px solid #007bb5;
+	background-color: #ffdd9e;
+	color: #10112F;
+	border: 2px solid #ffdd9e;
 	border-radius: 4px;
 	cursor: pointer;
 	transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
@@ -197,13 +197,13 @@ body {
 }
 
 .locationForm button:hover {
-	border-color: #005a8c;
-	background-color: #005a8c;
+	border-color: #ffc14d;
+	background-color: #ffc14d;
 }
 
 .locationForm button:focus {
-	border-color: #005a8c;
-	background-color: #005a8c;
+	border-color: #ffc14d;
+	background-color: #ffc14d;
 }
 
 .dates {
@@ -216,21 +216,24 @@ body {
 p {
 	font-family: 'Roboto', sans-serif;
 	font-size: 16px;
-	color: #586069;
+	color: #10112F;
 	margin-right: 20px;
 	margin-left: 20px;
+}
+
+p.date {
+	color: #fff;
 }
 
 .locationResult {
 	font-family: 'Roboto', sans-serif;
 	font-size: 16px;
-	color: #d9534f;
-	background-color: #f2dede;
-	border: 1px solid #ebcccc;
+	color: #a94442;
+	background-color: #fdcece;
 	padding: 12px 20px;
 	margin: 10px 0;
 	border-radius: 4px;
-	box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+	box-shadow: 0px 0px 10px 3px rgba(16, 17, 47, 1);
 	text-align: center;
 	transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 	max-width: 800px;
@@ -238,16 +241,17 @@ p {
 }
 
 .locationResult:hover {
-	background-color: #ebcccc;
+	background-color: #f7abab;
 	color: #a94442;
 }
 
 .tipDiv {
 	position: relative;
 	padding: 20px;
-	box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+	box-shadow: 0px 0px 10px 5px rgba(16, 17, 47, 1);
 	border-radius: 20px;
-	background-color: #ffffff;
+	background-color: #10112F;
+	color: #FFFFFF;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -259,7 +263,7 @@ p {
 .tip {
 	font-family: 'Roboto', sans-serif;
 	font-size: 16px;
-	color: #586069;
+	color: #FFFFFF;
 	margin: 0px 20px;
 	position: relative;
 }
@@ -276,7 +280,7 @@ p {
 }
 
 .tipModal-content {
-	background-color: #fefefe;
+	background-color: #10112F;
 	margin: 15% auto;
 	padding: 20px;
 	border: 1px solid #888;
@@ -286,11 +290,16 @@ p {
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
+.tipModal-content > p {
+	color: #fff;
+}
+
 .tipDiv > i {
 	position: absolute;
 	top: -10px;
 	right: -10px;
-	color: #007bb5;
+	color: #ffc14d;
+	background-color: #10112F;
 	font-size: 25px;
 	border-radius: 50%;
 	display: flex;
@@ -301,20 +310,20 @@ p {
 }
 
 .fa-circle-info:hover {
-	color: #005a8c;
+	color: #f9a915;
 	transform: scale(1.1) rotate(360deg);
 	cursor: help;
 }
 
 .fa-circle-xmark {
-	color: #aaa;
+	color: #ffc14d;
 	font-size: 35px;
 	font-weight: bold;
 	transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
 .fa-circle-xmark:hover {
-	color: #000;
+	color: #f9a915;
 	text-decoration: none;
 	cursor: pointer;
 	transform: scale(1.1) rotate(90deg);

@@ -12,16 +12,16 @@
 	justify-content: center;
 	margin: 40px;
 	padding: 40px;
-	box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+	box-shadow: 0px 0px 10px 7px rgba(16, 17, 47, 1);
 	border-radius: 20px;
-	background-color: #ffffff;
+	background-color: #10112F;
 }
 
 .hadithInfo h1 {
 	font-family: 'Roboto', sans-serif;
 	font-size: 32px;
 	font-weight: bold;
-	color: #24292e;
+	color: #fff;
 	margin-bottom: 10px;
 	margin-top: 0px;
 	transition: color 0.3s ease-in-out, font-size 0.3s ease-in-out;
@@ -30,24 +30,50 @@
 .hadithInfo p {
 	font-family: 'Roboto', sans-serif;
 	font-size: 16px;
-	color: #586069;
+	color: #fff;
 	margin: 10px 0;
 }
 
-.hadithInfo > :nth-child(2) > i{
-	color: #007bb5;
+.hadithInfo > :nth-child(2) > i {
+	color: #ffc14d;
 	font-size: 25px;
 	transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
 	margin: 0px 10px;
 	margin-top: 10px;
 	margin-bottom: 0px;
+	cursor: pointer;
 }
 
+.hadithInfo > :nth-child(2) > i:nth-child(2) {
+	cursor: help;
+}
+
+.hadithInfo > :nth-child(2) > i:hover {
+	color: #f9a915;
+}
 .rotating {
-	color: #007bb5;
+	color: #ffc14d;
 	font-size: 50px;
 	margin-top: 30px;
 	animation: rotate 0.7s linear infinite;
+}
+
+.not-rotating {
+	transition: transform 3s ease-in-out;
+}
+
+.not-rotating:hover {
+	transform: scale(1.2) rotate(180deg);
+	/* animation: rotating 1s ease-in-out 1; */
+}
+
+@keyframes rotating {
+	from {
+		transform: scale(2) rotate(0deg);
+	}
+	to {
+		transform: scale(2) rotate(720deg)
+	}
 }
 
 @keyframes rotate {

@@ -2,6 +2,7 @@
 .lds-roller div,
 .lds-roller div:after {
 	box-sizing: border-box;
+	color: #fff;
 }
 .lds-roller {
 	display: inline-block;

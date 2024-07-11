@@ -154,8 +154,8 @@ export default function PrayerTimes() {
 							</h1>
 							<span></span>
 							<div className="dates">
-								<p>{data.date.gregorian.weekday} the {data.date.gregorian.day}, {data.date.gregorian.month} {data.date.gregorian.year}</p>
-								<p>{data.date.hijri.weekday} the {data.date.hijri.day}, {data.date.hijri.month} {data.date.hijri.year}</p>
+								<p className='date'>{data.date.gregorian.weekday} the {data.date.gregorian.day}, {data.date.gregorian.month} {data.date.gregorian.year}</p>
+								<p className='date'>{data.date.hijri.weekday} the {data.date.hijri.day}, {data.date.hijri.month} {data.date.hijri.year}</p>
 							</div>
 							<PrayerTimings data={data} timeZone={timeZone} />
 						</div>
@@ -170,7 +170,7 @@ export default function PrayerTimes() {
 				</div>
 			)}
 			{modalVisibility && <TipModal onClose={toggleModal} />}
-			{hadithInfoVisibility && <HadithInfo hadithObject={hadith} onClose={toggleHadithInfoVisibility} />}
+			{hadithInfoVisibility && <HadithInfo hadithObject={hadith} onClose={toggleHadithInfoVisibility} remainingHadith={hadith.hadith_english_remaining}/>}
 		</div>
 	);
 }
