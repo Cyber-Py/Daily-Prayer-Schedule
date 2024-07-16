@@ -9,7 +9,6 @@ export const isUpcomingPrayer = (currentPrayerTime, nextPrayerTime, timeZone, pr
 	if (prevDay) {
 		currentTime = moment.tz(`${currentDate} ${nextPrayerTime}`, 'YYYY-MM-DD HH:mm', timeZone).add(1, 'day');
 	}
-	console.log(prevTime, currentTime)
 	let result = now.isBetween(prevTime, currentTime, null, '[)');
 	return result ? 'prayerTimeHighlight' : 'prayerTime';
 }
@@ -29,7 +28,7 @@ export async function getLatLon(cityName, countryName) {
 		if (data.length > 0) {
 			let city = data[0].display_name.split(',')[0].trim();
 			let country = data[0].display_name.split(',').pop().trim();
-			return { lat: data[0].lat, lon: data[0].lon, city: city, country: country };
+			return { lat: data[0].lat, lon: data[0].lon, city: city, country: country, display_name: data[0].display_name };
 		}
 		return false
 	} catch(err) {
@@ -104,11 +103,10 @@ export async function getPrayerTimes(city, country, lat, lon, day, month, year =
 	}
 }
 
-export async function getHadith () {
+export async function getHadith() {
 	const books = ['bukhari', 'muslim', 'abudawud', 'ibnmajah', 'tirmidhi']
 	const book = books[Math.floor(Math.random() * books.length)]
 	const url = `https://random-hadith-generator.vercel.app/${book}`
-	console.log(url)
 	try {
 		const response = await fetch(url);
 		const data = await response.json();

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { capitalizeFirstLetter, getLatLon, getPrayerTimes, getTimeZoneFromLatLon, getHadith } from './prayerTimeUtils';
-import TipModal from './components/TipModal';
+import HadithInfo from './components/modals/HadithInfoModal';
+import TipModal from './components/modals/TipModal';
 import PrayerTimings from './components/PrayerTimings';
 import moment from 'moment-timezone';
 import LoadingAnimation from './components/LoadingAnimation';
 import HadithCard from './components/HadithCard';
-import HadithInfo from './components/HadithInfo';
 
 export default function PrayerTimes() {
 	const [data, setData] = useState(null);
