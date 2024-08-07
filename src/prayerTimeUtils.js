@@ -103,25 +103,52 @@ export async function getPrayerTimes(city, country, lat, lon, day, month, year =
 	}
 }
 
-export async function getHadith() {
-	const books = ['bukhari', 'muslim', 'abudawud', 'ibnmajah', 'tirmidhi']
-	const book = books[Math.floor(Math.random() * books.length)]
-	const url = `https://random-hadith-generator.vercel.app/${book}`
+export async function getHadith(book = null, hadithNum = null) {
+	const books = [
+		"sahih-bukhari",
+		"sahih-muslim",
+		"al-tirmidhi",
+		"abu-dawood",
+		"ibn-e-majah"
+	];
+
+	const numberOfHadithsByBook = [7563, 3033, 3956, 5274, 4341];
+	const index = Math.floor(Math.random() * books.length);
+
+	if (!book) {
+		book = books[index];
+	}
+	if (!hadithNum) {
+		hadithNum = Math.floor(Math.random() * numberOfHadithsByBook[index]) + 1;
+	}
+
+	const apiKey = '$2y$10$8uBNjmNTPfSlU8CrT4we4Ylst8LmF6kt0P9LW3SqwLM7zwEN0W';
+	const apiUrl = `https://hadithapi.com/public/api/hadiths?apiKey=${apiKey}&book=${book}&hadithNumber=${hadithNum}`;
+	console.log(apiUrl)
 	try {
-		const response = await fetch(url);
-		const data = await response.json();
-		data.data.hadith_english = data.data.hadith_english.replace(/\n/g, ' ');
-		if (data.data.hadith_english.length > 230) {
-			let splitIndex = data.data.hadith_english.indexOf(' ', 230);
+		const response = await fetch(apiUrl);
+		const jsonData = await response.json();
+		const hadithData = jsonData.hadiths.data[0];
+
+		let hadithEnglish = hadithData.hadithEnglish
+		if (hadithEnglish.length > 230) {
+			let splitIndex = hadithEnglish.indexOf(' ', 230);
 			if (splitIndex === -1) {
 				splitIndex = 230;
 			}
-			data.data.hadith_english_remaining = data.data.hadith_english.slice(splitIndex);
-			data.data.hadith_english = data.data.hadith_english.slice(0, splitIndex) + '...';
+			hadithData.hadithEnglishRemaining = hadithEnglish.slice(splitIndex).trim();
+			hadithEnglish = hadithEnglish.slice(0, splitIndex).trim() + '...';
 		}
-		data.data.bookName = data.data.bookName.replace(/\n/g, '');
-		data.data.header = data.data.header.replace(/\n/g, '');
-		return data.data
+
+		return {
+			bookNameID: book,
+			book: hadithData.book.bookName,
+			bookName: hadithData.chapter.chapterEnglish,
+			header: hadithData.englishNarrator,
+			id: hadithData.hadithNumber,
+			hadith_english: hadithEnglish,
+			hadith_english_remaining: hadithData.hadithEnglishRemaining
+		};
 	} catch (error) {
 		throw error;
 	}

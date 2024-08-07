@@ -48,6 +48,15 @@
 	cursor: help;
 }
 
+.hadithInfo > :nth-child(2) > i:nth-child(3) {
+	transition: color 0.3s ease-in-out, transform 0.6s ease-in-out;
+	transform-style: preserve-3d;
+}
+
+.hadithInfo > :nth-child(2) > i:nth-child(3):hover {
+	transform: scale(1.1) rotate(360deg);
+}
+
 .hadithInfo > :nth-child(2) > i:hover {
 	color: #f9a915;
 }

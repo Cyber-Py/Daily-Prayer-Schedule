@@ -1,0 +1,40 @@
+.hadithInfoContent {
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+	background-color: #10112F;
+	padding: 20px;
+	border: 1px solid #888;
+	width: 80%;
+	max-width: 600px;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.hadithTip {
+	font-family: 'Roboto', sans-serif;
+	font-size: 16px;
+	color: #FFFFFF;
+	position: relative;
+}
+
+.hadithInfoModal select {
+	margin: 10px;
+	font-size: 16px;
+	color: #10112F;
+	border: 3px solid #D3BA8B;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out, color 0.3s ease-in-out;
+	outline: none;
+}
+
+.hadithInfoModal select:hover {
+	background-color: #ffc14d;
+	border-color: #ffc14d;
+}
+
+.hadithInfoModal select:focus {
+	background-color: #ffdd9e;
+	border-color: #ffdd9e;
+}

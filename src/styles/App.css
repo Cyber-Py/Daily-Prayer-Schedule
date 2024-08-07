@@ -60,7 +60,7 @@ body {
 	color: #ffc14d;
 	font-size: 30px;
 	margin-right: 25px;
-	transition: color 0.3s ease-in-out, transform 0.6s ease-in-out, box-shadow 0.3s ease-in-out;
+	transition: color 0.3s ease-in-out, transform 0.6s ease-in-out;
 	transform-style: preserve-3d;
 }
 
@@ -245,6 +245,12 @@ p.date {
 	color: #a94442;
 }
 
+.fa-circle-info:hover {
+	color: #f9a915;
+	transform: scale(1.1) rotate(360deg);
+	cursor: help;
+}
+
 .tipDiv {
 	position: relative;
 	padding: 20px;
@@ -309,12 +315,6 @@ p.date {
 	transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
-.fa-circle-info:hover {
-	color: #f9a915;
-	transform: scale(1.1) rotate(360deg);
-	cursor: help;
-}
-
 .fa-circle-xmark {
 	color: #ffc14d;
 	font-size: 35px;
@@ -327,10 +327,4 @@ p.date {
 	text-decoration: none;
 	cursor: pointer;
 	transform: scale(1.1) rotate(90deg);
-}
-
-@media (max-width: 800px) {
-	.locationForm {
-		flex-direction: column;
-	}
 }

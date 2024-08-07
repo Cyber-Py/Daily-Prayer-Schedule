@@ -6,6 +6,7 @@ import PrayerTimings from './components/PrayerTimings';
 import moment from 'moment-timezone';
 import LoadingAnimation from './components/LoadingAnimation';
 import HadithCard from './components/HadithCard';
+import HadithOptionsModal from './components/modals/HadithOptionsModal';
 
 export default function PrayerTimes() {
 	const [data, setData] = useState(null);
@@ -19,56 +20,107 @@ export default function PrayerTimes() {
 	const [loading, setLoading] = useState(false);
 	const [displayCity, setDisplayCity] = useState('');
 	const [displayCountry, setDisplayCountry] = useState('');
-	const [modalVisibility, setModalVisibility] = useState(false);
+	const [tipModalVisibility, setTipModalVisibility] = useState(false);
 	const [locationFormVisibility, setLocationFormVisibility] = useState(true);
 	const [hadith, setHadith] = useState(null);
 	const [hadithInfoVisibility, setHadithInfoVisibility] = useState(false);
 	const [hadithInfoLoading2, setHadithInfoLoading2] = useState(false);
+	const [hadithBook, setHadithBook] = useState(null);
+	const [hadithNumber, setHadithNumber] = useState(null);
+	const [hadithOptionsVisibility, setHadithOptionsVisibility] = useState(false);
+	const [initialHadithBook, setInitialHadithBook] = useState(null);
+	const [initialHadithNumber, setInitialHadithNumber] = useState(null);
+	const [error, setError] = useState(null); 
 
 	const handleChangeCity = (element) => {
-		setCity(capitalizeFirstLetter(element.target.value))
-		setSubmitted(false)
+		setCity(capitalizeFirstLetter(element.target.value));
+		setSubmitted(false);
+		setError(null); 
 	};
+
 	const handleChangeCountry = (element) => {
-		setCountry(capitalizeFirstLetter(element.target.value))
-		setSubmitted(false)
+		setCountry(capitalizeFirstLetter(element.target.value));
+		setSubmitted(false);
+		setError(null); 
 	};
 
 	const toggleModal = () => {
-		setModalVisibility(!modalVisibility);
-	}
+		setTipModalVisibility(!tipModalVisibility);
+	};
 
 	const handleHeadingClick = () => {
-		setData(null)
-		setCity('')
-		setCountry('')
-		document.title = 'Prayer Times'
+		setData(null);
+		setCity('');
+		setCountry('');
+		setHadithBook(null);
+		setHadithNumber(null);
+		document.title = 'Prayer Times';
 		setLocationFormVisibility(!locationFormVisibility);
-	}
+	};
 
 	const toggleHadithInfoVisibility = () => {
 		setHadithInfoVisibility(!hadithInfoVisibility);
-	}
+	};
+
+	const toggleHadithOptionsVisibility = () => {
+		if (!hadithOptionsVisibility) {
+			
+			setInitialHadithBook(hadithBook);
+			setInitialHadithNumber(hadithNumber);
+		} else {
+			
+			if (initialHadithBook !== hadithBook || initialHadithNumber !== hadithNumber) {
+				getNewHadith();
+			}
+		}
+		setHadithOptionsVisibility(!hadithOptionsVisibility);
+	};
 
 	const getNewHadith = () => {
 		setHadithInfoLoading2(true);
-		getHadith(city, country).then((data) => {
-			setHadith(data);
-			setHadithInfoLoading2(false);
-		});
-	}
-	
+		getHadith(hadithBook, hadithNumber)
+			.then((data) => {
+				setHadith(data);
+				setHadithBook(data.bookNameID);
+				setHadithNumber(data.id);
+				setError(null); 
+				setHadithInfoLoading2(false);
+			})
+			.catch(() => {
+				setError('Error fetching hadith. Please try again.');
+				setHadithInfoLoading2(false);
+			});
+	};
+
+	const getNewRandomHadith = () => {
+		setHadithInfoLoading2(true);
+		getHadith()
+			.then((data) => {
+				setHadith(data);
+				setHadithBook(data.bookNameID);
+				setHadithNumber(data.id);
+				setError(null); 
+				setHadithInfoLoading2(false);
+			})
+			.catch(() => {
+				setError('Error fetching random hadith. Please try again.');
+				setHadithInfoLoading2(false);
+			});
+	};
+
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		setCity(city.trim())
-		setCountry(country.trim())
+		setCity(city.trim());
+		setCountry(country.trim());
 		setSubmitted(true);
 		setPrayerTimeInfoLoading(true);
 		setHadithInfoLoading(true);
 		setData(null);
 		setIsValidLocation(true);
-		setModalVisibility(false);
+		setTipModalVisibility(false);
 		setLocationFormVisibility(false);
+		setError(null);
+
 		getLatLon(city, country)
 			.then((response) => {
 				if (response) {
@@ -76,48 +128,59 @@ export default function PrayerTimes() {
 					setCountry(response.country);
 					setDisplayCity(response.city);
 					setDisplayCountry(response.country);
-					getTimeZoneFromLatLon(response.lat, response.lon).then((timeZoneData) => {
-						setTimeZone(timeZoneData)
-						const momentDate = moment.tz(timeZone).toDate().toLocaleString();
-						const [month, day, year] = momentDate.split('/');
-						getPrayerTimes(city, country, response.lat, response.lon, day, month, year.slice(0, 4))
-							.then((prayerTimesResponse) => {
-								setData(prayerTimesResponse);
-								document.title = `${city}, ${country} | ${prayerTimesResponse.date.gregorian.day} ${prayerTimesResponse.date.gregorian.month} ${prayerTimesResponse.date.gregorian.year}`;
-								setPrayerTimeInfoLoading(false);
-							})
-							.catch((error) => {
-								setLocationFormVisibility(true)
-								setIsValidLocation(false);
-								setPrayerTimeInfoLoading(false);
-								setHadithInfoLoading(false);
-							});
-					})
-					.catch((error) => {
-						setLocationFormVisibility(true)
-						setIsValidLocation(false);
-						setPrayerTimeInfoLoading(false);
-						setHadithInfoLoading(false);
-					})
+					getTimeZoneFromLatLon(response.lat, response.lon)
+						.then((timeZoneData) => {
+							setTimeZone(timeZoneData);
+							const momentDate = moment.tz(timeZone).toDate().toLocaleString();
+							const [month, day, year] = momentDate.split('/');
+							getPrayerTimes(city, country, response.lat, response.lon, day, month, year.slice(0, 4))
+								.then((prayerTimesResponse) => {
+									setData(prayerTimesResponse);
+									document.title = `${city}, ${country} | ${prayerTimesResponse.date.gregorian.day} ${prayerTimesResponse.date.gregorian.month} ${prayerTimesResponse.date.gregorian.year}`;
+									setPrayerTimeInfoLoading(false);
+								})
+								.catch(() => {
+									setError('Error fetching prayer times. Please try again.');
+									setLocationFormVisibility(true);
+									setIsValidLocation(false);
+									setPrayerTimeInfoLoading(false);
+									setHadithInfoLoading(false);
+								});
+						})
+						.catch(() => {
+							setError('Error fetching time zone. Please try again.');
+							setLocationFormVisibility(true);
+							setIsValidLocation(false);
+							setPrayerTimeInfoLoading(false);
+							setHadithInfoLoading(false);
+						});
 				} else {
-					setLocationFormVisibility(true)
+					setError(`${city}, ${country} is not a valid location`);
+					setLocationFormVisibility(true);
 					setIsValidLocation(false);
 					setPrayerTimeInfoLoading(false);
 					setHadithInfoLoading(false);
-					document.title = 'Prayer Times'
+					document.title = 'Prayer Times';
 				}
 			})
-			.catch((error) => {
-				setLocationFormVisibility(true)
+			.catch(() => {
+				setError('Error fetching location. Please try again.');
+				setLocationFormVisibility(true);
 				setIsValidLocation(false);
 				setPrayerTimeInfoLoading(false);
 				setHadithInfoLoading(false);
 			});
-		getHadith()
+		getHadith(hadithBook, hadithNumber)
 			.then((response) => {
-				setHadith(response)
+				setHadith(response);
+				setHadithBook(response.bookNameID);
+				setHadithNumber(response.id);
 				setHadithInfoLoading(false);
 			})
+			.catch(() => {
+				setError('Error fetching hadith. A new hadith will be displayed.');
+				setHadithInfoLoading(false);
+			});
 	};
 
 	useEffect(() => {
@@ -143,7 +206,7 @@ export default function PrayerTimes() {
 					</form>
 				</div>
 			)}
-			{!isValidLocation && submitted && <p className='locationResult'>{city}, {country} is not a valid location</p>}
+			{(!isValidLocation || error) && submitted && <p className='locationResult'>{error}</p>}
 			{data && hadith && isValidLocation && (
 				<div className="locationInfoContainer">
 					<div className="locationInfo">
@@ -160,7 +223,7 @@ export default function PrayerTimes() {
 							<PrayerTimings data={data} timeZone={timeZone} />
 						</div>
 					</div>
-					<HadithCard hadithObject={hadith} onInfoClick={toggleHadithInfoVisibility} onRegenerateClick={getNewHadith} isLoading={hadithInfoLoading2}/>
+					<HadithCard hadithObject={hadith} onInfoClick={toggleHadithInfoVisibility} onRegenerateClick={getNewRandomHadith} onOptionsClick={toggleHadithOptionsVisibility} isLoading={hadithInfoLoading2} />
 				</div>
 			)}
 			{data && isValidLocation && (
@@ -169,8 +232,9 @@ export default function PrayerTimes() {
 					<i className="fa-solid fa-circle-info" onClick={toggleModal}></i>
 				</div>
 			)}
-			{modalVisibility && <TipModal onClose={toggleModal} />}
-			{hadithInfoVisibility && <HadithInfo hadithObject={hadith} onClose={toggleHadithInfoVisibility} remainingHadith={hadith.hadith_english_remaining}/>}
+			{tipModalVisibility && <TipModal onClose={toggleModal} />}
+			{hadithInfoVisibility && <HadithInfo hadithObject={hadith} onClose={toggleHadithInfoVisibility} />}
+			{hadithOptionsVisibility && <HadithOptionsModal setHadithBookFunc={setHadithBook} setHadithNumberFunc={setHadithNumber} currentHadithBook={hadithBook} currentHadithNumber={hadithNumber} onClose={toggleHadithOptionsVisibility} />}
 		</div>
 	);
 }
