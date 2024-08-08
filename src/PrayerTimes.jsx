@@ -7,6 +7,7 @@ import moment from 'moment-timezone';
 import LoadingAnimation from './components/LoadingAnimation';
 import HadithCard from './components/HadithCard';
 import HadithOptionsModal from './components/modals/HadithOptionsModal';
+import GeolocationRequestButton from './components/GeolocationRequestButton';
 
 export default function PrayerTimes() {
 	const [data, setData] = useState(null);
@@ -204,6 +205,7 @@ export default function PrayerTimes() {
 						<input value={country} onChange={handleChangeCountry} placeholder="Enter country" />
 						<button type="submit">Submit</button>
 					</form>
+					<GeolocationRequestButton onSubmit={handleSubmit} setCityFunc={setCity} setCountryFunc={setCountry} setDisplayCityFunc={setDisplayCity} setDisplayCountryFunc={setDisplayCountry} setErrorFunc={setError} handleSubmitFunc={handleSubmit}/>
 				</div>
 			)}
 			{(!isValidLocation || error) && submitted && <p className='locationResult'>{error}</p>}

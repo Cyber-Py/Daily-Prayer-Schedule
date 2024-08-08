@@ -176,3 +176,12 @@ export async function getTimeZoneFromLatLon(lat, lon) {
 	}
 }
 
+export async function getCityCountry(lat, lon) {
+	const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`;
+	const response = await fetch(url);
+	const data = await response.json();
+	return {
+		city: data.address.city,
+		country: data.address.country
+	};
+}
