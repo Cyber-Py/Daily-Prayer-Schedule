@@ -124,7 +124,6 @@ export async function getHadith(book = null, hadithNum = null) {
 
 	const apiKey = '$2y$10$8uBNjmNTPfSlU8CrT4we4Ylst8LmF6kt0P9LW3SqwLM7zwEN0W';
 	const apiUrl = `https://hadithapi.com/public/api/hadiths?apiKey=${apiKey}&book=${book}&hadithNumber=${hadithNum}`;
-	console.log(apiUrl)
 	try {
 		const response = await fetch(apiUrl);
 		const jsonData = await response.json();
