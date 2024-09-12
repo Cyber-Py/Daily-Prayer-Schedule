@@ -131,3 +131,6 @@ dist
 
 # Replit configuration file
 .replit
+
+# Breakpoints file
+.breakpoints
