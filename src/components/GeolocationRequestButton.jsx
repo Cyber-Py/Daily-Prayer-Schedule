@@ -1,7 +1,8 @@
 import React, { useState, useRef } from "react";
 import { getCityCountry } from "../prayerTimeUtils";
+import LoadingAnimation from './LoadingAnimation';
 
-export default function GeolocationRequestButton({ setCityFunc, setCountryFunc, setErrorFunc, setDisplayCityFunc, setDisplayCountryFunc, handleSubmitFunc }) {
+export default function GeolocationRequestButton({ setCityFunc, setCountryFunc, setErrorFunc, setDisplayCityFunc, setDisplayCountryFunc, isLoadingLocationVar, setIsLoadingLocationFunc }) {
 	const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 	const timeoutRef = useRef(null);
 
@@ -11,9 +12,11 @@ export default function GeolocationRequestButton({ setCityFunc, setCountryFunc, 
 				clearTimeout(timeoutRef.current);
 			}
 			setIsButtonDisabled(true);
+			setIsLoadingLocationFunc(true);
 			navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
 			timeoutRef.current = setTimeout(() => {
 				setIsButtonDisabled(false);
+				setIsLoadingLocationFunc(false);
 				timeoutRef.current = null;
 			}, 5000);
 		} else {
@@ -30,8 +33,10 @@ export default function GeolocationRequestButton({ setCityFunc, setCountryFunc, 
 			setDisplayCityFunc(cityCountry.city);
 			setCountryFunc(cityCountry.country);
 			setDisplayCountryFunc(cityCountry.country);
+			setIsLoadingLocationFunc(false);
 		}).catch(() => {
 			setErrorFunc("Error fetching location. Please try again.");
+			setIsLoadingLocationFunc(false);
 		});
 	};
 
@@ -52,7 +57,16 @@ export default function GeolocationRequestButton({ setCityFunc, setCountryFunc, 
 			default:
 				setErrorFunc("An unexpected error occurred.");
 		}
+		setIsLoadingLocationFunc(false);
 	};
 
-	return <button onClick={getLocation} disabled={isButtonDisabled}>Get Location</button>;
+	return (
+		<>
+			{isLoadingLocationVar ? (
+				<LoadingAnimation />
+			) : (
+				<button onClick={getLocation} disabled={isButtonDisabled}>Get Location</button>
+			)}
+		</>
+	);
 }

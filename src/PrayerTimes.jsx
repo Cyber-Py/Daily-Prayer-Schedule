@@ -23,6 +23,7 @@ export default function PrayerTimes() {
 	const [displayCountry, setDisplayCountry] = useState('');
 	const [tipModalVisibility, setTipModalVisibility] = useState(false);
 	const [locationFormVisibility, setLocationFormVisibility] = useState(true);
+	const [isLoadingLocation, setIsLoadingLocation] = useState(false);
 	const [hadith, setHadith] = useState(null);
 	const [hadithInfoVisibility, setHadithInfoVisibility] = useState(false);
 	const [hadithInfoLoading2, setHadithInfoLoading2] = useState(false);
@@ -31,7 +32,7 @@ export default function PrayerTimes() {
 	const [hadithOptionsVisibility, setHadithOptionsVisibility] = useState(false);
 	const [initialHadithBook, setInitialHadithBook] = useState(null);
 	const [initialHadithNumber, setInitialHadithNumber] = useState(null);
-	const [error, setError] = useState(null); 
+	const [error, setError] = useState(null);
 
 	const handleChangeCity = (element) => {
 		setCity(capitalizeFirstLetter(element.target.value));
@@ -69,7 +70,7 @@ export default function PrayerTimes() {
 			setInitialHadithBook(hadithBook);
 			setInitialHadithNumber(hadithNumber);
 		} else {
-			
+
 			if (initialHadithBook !== hadithBook || initialHadithNumber !== hadithNumber) {
 				getNewHadith();
 			}
@@ -205,7 +206,7 @@ export default function PrayerTimes() {
 						<input value={country} onChange={handleChangeCountry} placeholder="Enter country" />
 						<button type="submit">Submit</button>
 					</form>
-					<GeolocationRequestButton onSubmit={handleSubmit} setCityFunc={setCity} setCountryFunc={setCountry} setDisplayCityFunc={setDisplayCity} setDisplayCountryFunc={setDisplayCountry} setErrorFunc={setError} handleSubmitFunc={handleSubmit}/>
+					<GeolocationRequestButton onSubmit={handleSubmit} setCityFunc={setCity} setCountryFunc={setCountry} setDisplayCityFunc={setDisplayCity} setDisplayCountryFunc={setDisplayCountry} setErrorFunc={setError} isLoadingLocationVar={isLoadingLocation} setIsLoadingLocationFunc={setIsLoadingLocation}/>
 				</div>
 			)}
 			{(!isValidLocation || error) && submitted && <p className='locationResult'>{error}</p>}
