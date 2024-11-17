@@ -1,4 +1,5 @@
 import React from 'react';
+import '../styles/hadithCard.css'
 
 export default function HadithCard({ hadithObject, onRegenerateClick, onInfoClick, onOptionsClick, isLoading }) {
 	if (isLoading) {

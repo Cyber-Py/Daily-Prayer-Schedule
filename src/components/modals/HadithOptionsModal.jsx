@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import '../../styles/hadithOptionsModal.css';
 
 export default function HadithOptionsModal({ setHadithBookFunc, setHadithNumberFunc, currentHadithBook, currentHadithNumber, onClose }) {
 	const [currentHadithNumbers, setCurrentHadithNumbers] = useState([]);

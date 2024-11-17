@@ -1,4 +1,5 @@
 import React from 'react';
+import '../styles/loadingAnimation.css';
 
 export default function LoadingAnimation() {
 	return (
